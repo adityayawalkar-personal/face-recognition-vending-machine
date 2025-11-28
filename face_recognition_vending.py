@@ -10,14 +10,12 @@ import numpy as np
 arduino = serial.Serial('COM11', 9600, timeout=1)
 time.sleep(2)
 
-# Load face recognition model (replace with your trained model)
+# Load face recognition model
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
-#known_faces = {'Aditya Yawalkar': "C:\Users\Aditya\Downloads\iloveimg-converted\IMG20231229172825.jpg", "Abdur Rahman Khan": "C:\Users\Aditya\Downloads\iloveimg-converted\Abdur (6).jpg", "Advaith Ajithkumar": "C:\Users\Aditya\Downloads\iloveimg-converted\Advaith_Smile (113).jpg", "Amarpreet Singh Chaman": "C:\Users\Aditya\Downloads\iloveimg-converted\Amar_Normal (35).jpg"}
 known_faces = {
-    "Aditya Yawalkar": r"C:\Users\Aditya\Downloads\iloveimg-converted\IMG20231229172825.jpg",
-    "Abdur Rahman Khan": r"C:\Users\Aditya\Downloads\iloveimg-converted\Abdur (6).jpg",
-    "Advaith Ajithkumar": r"C:\Users\Aditya\Downloads\iloveimg-converted\Advaith_Smile (113).jpg",
-    "Amarpreet Singh Chaman": r"C:\Users\Aditya\Downloads\iloveimg-converted\Amar_Normal (35).jpg"
+    "Person2": r"file_path",
+    "Person3": r"file_path",
+    "Person4": r"file_path"
 }
 
 def recognize_face(frame):
@@ -25,10 +23,9 @@ def recognize_face(frame):
     faces = face_cascade.detectMultiScale(gray, 1.3, 5)
     for (x, y, w, h) in faces:
         roi_gray = gray[y:y + h, x:x + w]
-        # Compare with known faces (simplified)
         for name, img_path in known_faces.items():
             known_img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
-            if np.mean(roi_gray) - np.mean(known_img) < 10:  # Simple threshold comparison
+            if np.mean(roi_gray) - np.mean(known_img) < 10:  #threshold_comparison
                 return name
     return "Face not recognized"
 
@@ -54,14 +51,13 @@ canvas.pack()
 
 label_name = Label(root, text="Name: --", font=("Arial", 14))
 label_name.pack()
-
 label_sensor = Label(root, text="", font=("Arial", 12))
 label_sensor.pack()
 
 button_capture = Button(root, text="Capture Image", command=capture_image)
 button_capture.pack()
 
-# Video Capture
+# Video Capturing
 cap = cv2.VideoCapture(0)
 
 def update_frame():
