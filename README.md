@@ -4,11 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Face Recognition Based Vending Machine</title>
 </head>
 <body>
-
-<h1>Face Recognition Based Vending Machine</h1>
 
 <p>An intelligent vending machine system that uses facial recognition to identify users and dispenses items through Arduino-controlled hardware.</p>
 
